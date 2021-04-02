@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=.9">
+		<style>
+		html {
+			/* float: center; 
+			width: 480px; */
+			/* border: 3px solid #8AC007; */
+			padding: 10px;
+			max-width: 800;
+			
+			/*background: url('https://goo.gl/04j7Nn');*/
+			background: url('https://dl.dropbox.com/s/ri3e1bwazx0ngvn/bo_play_pattern.png?dl=0');
+			min-height: 500px;
+			background-attachment: fixed;
+			/*background-position: center center;*/
+			*/background-repeat: repeat;*/
+			background-size: cover;
+			
+			/* -webkit-text-stroke: 1px black;*/
+			font-family: 'Shift', sans-serif;
+			text-shadow: 2px 2px 3px gray; 
+
+
+		}
+		
+		#wrap {
+			
+			width: 480px; 
+			margin: 0 auto;
+			
+			 
+		}
+
+		input, textarea {
+			max-width:100%
+		}
+
+		#button {
+			background-color: #1d4ea3;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius:5px;
+			color: white;
+
+			font-size: 24px;
+			text-decoration: 2px;
+			cursor: pointer;
+			border:none;
+			box-shadow: 1px 1px 1px #777;
+		}
+
+		#button:hover {
+
+			background: black;
+			box-shadow: 4px 4px 5px #777;
+			
+		}
+		div.head {
+
+
+			font-weight: bold;
+			padding-top: 14px;
+			padding-bottom: 14px;
+			padding-left: 30px;
+			position: relative;
+			z-index: 2;
+			background-color: #a6a6a6;
+			opacity: .6;
+			box-shadow: 10px 10px
+
+		}
+
+		div.sub {
+
+			margin: 5px;
+			font-size: 20px;
+			padding-top: 10px;
+			padding-bottom: 14px;
+			padding-left: 30px;
+			position: center;
+			z-index: 4;
+			background-color: #aaccff;
+			opacity: .6;
+			box-shadow: 10px 10px;
+
+		}
+
+		div.links {
+
+			box-shadow: 10px 10px;
+			padding: 30px;
+			position: relative;
+			z-index: 2;
+			background-color: #a6a6a6;
+			opacity: .6;
+
+		}
+
+
+
+		</style>
+
+	</head>
+
+
+<body>
+<div id="wrap">
+	<div class="head">
+		<h1>Rock Paper Scissors</h1>
+		<h4> A game by codeRomeo(c) 2015 </h4>
+	</div>
+	<!-- setup view interface layout and element IDs for controller -->
+
+			<div class="sub">
+					<p id="score"> Score : </p>
+					<p id="user"> You : </p>
+					<p id="computer"> Computer : </p>
+					<p id="result"> Who wins ?.. </p>
+
+						<!-- setup view interface layout for user choice buttons and element IDs for controller -->
+						<!-- Play function is the View Contoller  -->
+
+
+						<button type="button" id ="button" onclick="play('rock')">Rock </button>
+						<button type="button" id ="button" onclick="play('paper')">Paper </button>
+						<button type="button" id ="button" onclick="play('scissors')">Scissors </button>
+
+			</div>
+			<div class="links">
+					<p id="links"> Other links </p>
+					<ul>
+					<li> <a href="https://codeRomeo.github.io/hello.html"> IronHack Workshop </a>
+					<li> <a href="https://dl.dropbox.com/s/0tw0yp2nuc0rxlx/Fahrenheit_to_Celsius.html?dl=0"> Temperature Converter </a>
+					<li> <a href="https://dl.dropbox.com/s/ad22ljkzpxc21jt/SecondPage.html?dl=0"> Second page </a>
+					<li> <a href="https://dl.dropbox.com/s/ix7siidx1neif80/thirdpage.html?dl=0"> Third page </a>
+					</ul>
+			</div>
+
+<script>
+
+/* global variables */
+var userScore = 0;
+var computerScore = 0;
+var userChoice ="";
+var computerChoice="";
+
+
+// Main view Controller class instance
+
+function play(userChoice) {
+
+
+
+	computerChoice = randomize();
+
+	document.getElementById("user").innerHTML = "You -- > " + userChoice; // display User choice
+	document.getElementById("computer").innerHTML = "Computer -- >  " + computerChoice; // display computer choice
+	document.getElementById("result").innerHTML = compare(userChoice, computerChoice); // display results
+	document.getElementById("score").innerHTML = "Scores --- You: [ "+userScore+" ] --- Computer : [ "+computerScore+" ]"; // display scores
+
+	// Play Function ends
+
+}
+
+// helper classes
+
+function randomize() {
+// This class  returns Rock, Paper or scissors rondomly randomizes Computer choice and
+
+	var x = Math.random();
+
+	if (x < 0.34)  return "rock"
+	else if (x <= 0.67) return  "paper"
+	else return "scissors";
+
+	}
+
+
+/* compare class function to determine winner */
+function compare(choice1, choice2) {
+
+	if (choice1 === choice2) return "The result is a tie!"
+
+		else if (choice1 === "rock") {
+			if (choice2 === "scissors" )  { userScore++; return "Rock wins"; }
+			else { computerScore++; return "Paper wins";}
+		}
+		else if (choice1 === "paper") {
+			if (choice2 === "rock" ) { userScore++; return "Paper wins" }
+			else { computerScore++; return "Scissors wins" }
+		}
+		else if (choice1 === "scissors") {
+			if (choice2 === "rock" ) { computerScore++; return "Rock wins" }
+			else { userScore++; return "Scissors wins" }
+		}
+
+		// compare Function ends
+	}
+
+</script>
+
+
+<div class="head">
+	<h1> Convert Fahrenheit to Celsius </h1>
+</div>
+
+
+<div class="sub">
+		<h3>
+
+		<!-- setup view interface layout and element IDs for controller -->
+
+
+		Fahrenheit : <input type="text" id="FInput" value="">
+		<button ref="button" id="button" onclick="f2c()">Convert </button>
+
+		 <ul id="C_out"> Celsius : </ul>
+
+		Celsius : <input type="text" id="CInput" value="">
+
+		<button ref="button" id="button" onclick="c2f()">Convert </button>
+
+		<ul id="F_out"> Fahrenheit : </ul>
+
+	  </h3>
+
+	</div>
+	<div class="links">
+			<a href="http://www.coderomeo.com"> Back </a>
+	</div>
+</div>
+
+<!-- View Contoller  -->
+
+<script>
+
+// global variables
+
+var inputF = 1;
+var inputC = 1;
+var outputF = 1;
+var outputC = 1;
+
+
+function c2f() {
+
+
+	inputC = parseInt(document.getElementById("CInput").value,10);
+	outputF = ((inputC*9/5+32)).toFixed(2);
+
+	document.getElementById("F_out").innerHTML = "Fahrenheit : " + outputF;
+
+	};
+
+function f2c()  {
+
+		inputF = parseInt(document.getElementById("FInput").value,10);
+		outputC = (((inputF-32)*5/9)).toFixed(2);
+
+		document.getElementById("C_out").innerHTML = "Celsius : " + outputC;
+	};
+
+
+</script>
+
+
+</body>
+</html>
